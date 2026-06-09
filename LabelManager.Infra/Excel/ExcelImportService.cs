@@ -12,44 +12,39 @@ namespace LabelManager.Infra.Excel;
 
 public class ExcelImportService : IExcelImportService
 {
-    private const string ColNumeroEtiqueta = "numeroetiqueta";
-    private const string ColProduto = "produto";
-    private const string ColDescricao = "descricao";
-    private const string ColLote = "lote";
-    private const string ColDataValidade = "datavalidade";
-    private const string ColCodigoBarras = "codigobarras";
-
+    private const string ColNumeroEtiqueta = "seq";
+    private const string ColRep = "rep";
+    private const string ColTrat= "trat";
+    private const string ColLinha = "linha";
     public IReadOnlyList<LabelData> Importar(string caminhoArquivo)
     {
         if (!File.Exists(caminhoArquivo)) throw new FileNotFoundException("Arquivo Excel Não encontrado.", caminhoArquivo);
 
         using var workbook = new XLWorkbook(caminhoArquivo);
         var planilha = workbook.Worksheets.First();
-
         var colunas = MapearColunas (planilha); //mapeia o nome da coluna index
 
         if (!colunas.ContainsKey(ColNumeroEtiqueta))
             throw new InvalidOperationException(
-                "Coluna 'NumeroEtiqueta' não encontrada na planilha");
+                "Coluna 'Seq' não encontrada na planilha");
 
         var resultado = new List<LabelData>();
         var ultimaLinha = planilha.LastRowUsed()?.RowNumber() ?? 1;
 
         for (int row = 2; row <= ultimaLinha; row++) //inicia em 2 pois 1 é cabeçalho
         {
-            var numero = LerCelula(planilha, row, colunas, ColNumeroEtiqueta);
-
-            if (string.IsNullOrWhiteSpace(numero)) continue; //ignora linha vazia e continua
+            var seq = LerCelula(planilha, row, colunas, ColNumeroEtiqueta);
+            if (string.IsNullOrWhiteSpace(seq)) continue; //ignora linha vazia e continua
 
             var label = new LabelData
             {
                 Row = row,
-                NumeroEtiqueta = numero,
-                Produto = LerCelula(planilha, row, colunas, ColProduto),
-                Descricao = LerCelula(planilha, row, colunas, ColDescricao),
-                Lote = LerCelula(planilha, row, colunas, ColLote),
-                DataValidade = LerCelula(planilha, row, colunas, ColDataValidade),
-                CodigoBarras = LerCelula(planilha, row, colunas, ColCodigoBarras),
+                NumeroEtiqueta = seq,
+                Seq = seq,
+                Rep = LerCelula(planilha, row, colunas, ColRep),
+                Trat = LerCelula(planilha, row, colunas, ColTrat),
+                Linha = LerCelula(planilha, row, colunas, ColLinha),
+                
             };
 
             Validar(label);
@@ -84,7 +79,7 @@ public class ExcelImportService : IExcelImportService
         if (string.IsNullOrWhiteSpace(label.NumeroEtiqueta))
         {
             label.IsValid = false;
-            label.ErroValidacao = "NumeroEtiqueta está vazio.";
+            label.ErroValidacao = "Seq está vazio.";
         }
     }
 

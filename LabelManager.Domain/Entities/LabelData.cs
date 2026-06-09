@@ -9,12 +9,17 @@ namespace LabelManager.Domain.Entities
     public class LabelData
     {
         public int Row { get; set; }
+
+        //campos da planilha
         public string NumeroEtiqueta { get; set; } = string.Empty;
-        public string? Produto { get; set; }
-        public string? Descricao { get; set; }
-        public string? Lote {  get; set; }
-        public string? DataValidade { get; set; }
+        public string? Seq { get; set; }
+        public string? Rep { get; set; }
+        public string? Trat {  get; set; }
+        public string? Linha { get; set; }
         public string? CodigoBarras { get; set; }
+        
+
+        //validação
         public bool IsValid { get; set; } = true;
         public string? ErroValidacao { get; set; }
 

@@ -88,7 +88,7 @@ partial class frmMain
         btnImprimir.Location = new Point(885, 15);
         btnImprimir.Size = new Size(150, 30);
         btnImprimir.Enabled = false;
-        btnImprimir.Click += btnImprimir_Click;
+        
 
         pnlTopo.Controls.AddRange([lblArquivo, txtArquivo,
             btnSelecionar, btnGerarZpl, btnImprimir]);
