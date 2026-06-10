@@ -16,7 +16,7 @@ partial class frmMain
 
     private SimpleButton btnSelecionar;
     private SimpleButton btnGerarZpl;
-    private SimpleButton btnImprimir;
+    //private SimpleButton btnImprimir;
     private TextEdit txtArquivo;
     private LabelControl lblArquivo;
     private LabelControl lblStatus;
@@ -45,7 +45,7 @@ partial class frmMain
 
         btnSelecionar = new SimpleButton();
         btnGerarZpl = new SimpleButton();
-        btnImprimir = new SimpleButton();
+        //btnImprimir = new SimpleButton();
         txtArquivo = new TextEdit();
         lblArquivo = new LabelControl();
         lblStatus = new LabelControl();
@@ -84,14 +84,14 @@ partial class frmMain
         btnGerarZpl.Enabled = false;
         btnGerarZpl.Click += btnGerarZpl_Click;
 
-        btnImprimir.Text = "Enviar p/ Impressora";
-        btnImprimir.Location = new Point(885, 15);
-        btnImprimir.Size = new Size(150, 30);
-        btnImprimir.Enabled = false;
+        //btnImprimir.Text = "Enviar p/ Impressora";
+        //btnImprimir.Location = new Point(885, 15);
+        //btnImprimir.Size = new Size(150, 30);
+        //btnImprimir.Enabled = false;
         
 
         pnlTopo.Controls.AddRange([lblArquivo, txtArquivo,
-            btnSelecionar, btnGerarZpl, btnImprimir]);
+            btnSelecionar, btnGerarZpl,]);
 
         // ── SplitContainer (Grid | ZPL) ─────────────────────────────────
         splitMain.Dock = DockStyle.Fill;

@@ -16,9 +16,7 @@ namespace LabelManager.Domain.Entities
         public string? Rep { get; set; }
         public string? Trat {  get; set; }
         public string? Linha { get; set; }
-        public string? CodigoBarras { get; set; }
-        
-
+    
         //validação
         public bool IsValid { get; set; } = true;
         public string? ErroValidacao { get; set; }

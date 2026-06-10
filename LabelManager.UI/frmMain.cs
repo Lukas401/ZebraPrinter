@@ -121,7 +121,6 @@ public partial class frmMain : Form
 
         if (confirmacao != DialogResult.Yes) return;
         btnGerarZpl.Enabled = false;
-        btnImprimir.Enabled = false;
         btnSelecionar.Enabled = false;
 
         int enviadas = 0;
@@ -149,7 +148,7 @@ public partial class frmMain : Form
                     System.Windows.Forms.Application.DoEvents();
 
                     // pausa para não sobrecarregar a impressora
-                    await Task.Delay(500);
+                    await Task.Delay(800);
                 }
                 catch (Exception ex)
                 {
@@ -175,40 +174,12 @@ public partial class frmMain : Form
         }
     }
 
-    //private async void btnImprimir_Click(object sender, EventArgs e)
-    //{
-    //    if (string.IsNullOrWhiteSpace(txtZpl.Text)) return;
-
-    //    try
-    //    {
-    //        btnImprimir.Enabled = false;
-    //        lblStatus.Text = "Enviando para impressora virtual...";
-
-    //        await _printService.EnviarZplAsync(txtZpl.Text);
-
-    //        lblStatus.Text = "✔ ZPL enviado! Verifique o Virtual-ZPL-Printer.";
-    //        Log.Information("ZPL enviado para impressora virtual");
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        Log.Error(ex, "Erro ao enviar ZPL");
-    //        XtraMessageBox.Show(
-    //            $"Não foi possível conectar ao Virtual-ZPL-Printer.\n" +
-    //            $"Verifique se o programa está aberto na porta 9100.\n\n{ex.Message}",
-    //            "Erro de Conexão", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-    //    }
-    //    finally
-    //    {
-    //        btnImprimir.Visible = false;
-    //    }
-    //}
-
     private void gridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
     {
         if (sender is not GridView view) return;
         if (view.GetFocusedRow() is not LabelData label) return;
 
         txtZpl.Text = _service.GerarZplUnico(label);
-        btnImprimir.Enabled = true;
+        //btnImprimir.Enabled = true;
     }
 }

@@ -13,7 +13,7 @@ namespace LabelManager.Infra.Zpl;
     private readonly string _host;
     private readonly int _port;
 
-    // Padrão: Virtual-ZPL-Printer escuta em localhost:9100
+    //Virtual-ZPL-Printer escuta em localhost:9100
     public PrintService(string host = "127.0.0.1", int port = 9100)
     {
         _host = host;
